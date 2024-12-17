@@ -12,15 +12,27 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f8ff;
+            background-image: url('background.jpg'); /* Add your background image here */
+            background-size: cover;
+            background-position: center;
         }
 
         .container {
             text-align: center;
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+        }
+
+        #fact {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .visible {
+            opacity: 1;
         }
 
         button {
@@ -37,31 +49,78 @@
         button:hover {
             background-color: #0056b3;
         }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Fun Fact Generator</h1>
         <p id="fact">Click the button to see a fun fact about Earth!</p>
+        <img id="fact-image" src="" alt="Fun Fact Image" style="display:none;">
         <button onclick="generateFact()">Show Fun Fact</button>
     </div>
     <script>
         const facts = [
-            "Earth is the only planet in our solar system not named after a mythological deity.",
-            "Approximately 70% of Earth's surface is covered by water, making it the 'Blue Planet.'",
-            "Earth's atmosphere is composed of roughly 78% nitrogen, 21% oxygen, and 1% other gases.",
-            "Earth is the only planet known to have plate tectonics, which play a crucial role in the carbon cycle and climate regulation.",
-            "Earth has a powerful magnetic field, which protects the planet from harmful solar radiation.",
-            "Earth's moon is the largest relative to its planet in the solar system, and it stabilizes Earth's axial tilt, which helps maintain a stable climate.",
-            "Earth is estimated to be about 4.54 billion years old.",
-            "The Earth's rotation is gradually slowing down, at a rate of approximately 17 milliseconds per century.",
-            "Earth is the only known planet to support life, with millions of species ranging from microscopic organisms to large mammals.",
-            "The Earth's core is as hot as the surface of the sun, with temperatures reaching up to 5,700 degrees Celsius (10,292 degrees Fahrenheit)."
+            {
+                text: "Earth is the only planet in our solar system not named after a mythological deity.",
+                image: "earth1.jpg" // Add your image path here
+            },
+            {
+                text: "Approximately 70% of Earth's surface is covered by water, making it the 'Blue Planet.'",
+                image: "earth2.jpg"
+            },
+            {
+                text: "Earth's atmosphere is composed of roughly 78% nitrogen, 21% oxygen, and 1% other gases.",
+                image: "earth3.jpg"
+            },
+            {
+                text: "Earth is the only planet known to have plate tectonics, which play a crucial role in the carbon cycle and climate regulation.",
+                image: "earth4.jpg"
+            },
+            {
+                text: "Earth has a powerful magnetic field, which protects the planet from harmful solar radiation.",
+                image: "earth5.jpg"
+            },
+            {
+                text: "Earth's moon is the largest relative to its planet in the solar system, and it stabilizes Earth's axial tilt, which helps maintain a stable climate.",
+                image: "earth6.jpg"
+            },
+            {
+                text: "Earth is estimated to be about 4.54 billion years old.",
+                image: "earth7.jpg"
+            },
+            {
+                text: "The Earth's rotation is gradually slowing down, at a rate of approximately 17 milliseconds per century.",
+                image: "earth8.jpg"
+            },
+            {
+                text: "Earth is the only known planet to support life, with millions of species ranging from microscopic organisms to large mammals.",
+                image: "earth9.jpg"
+            },
+            {
+                text: "The Earth's core is as hot as the surface of the sun, with temperatures reaching up to 5,700 degrees Celsius (10,292 degrees Fahrenheit).",
+                image: "earth10.jpg"
+            }
         ];
 
         function generateFact() {
             const randomIndex = Math.floor(Math.random() * facts.length);
-            document.getElementById('fact').textContent = facts[randomIndex];
+            const factElement = document.getElementById('fact');
+            const factImage = document.getElementById('fact-image');
+
+            factElement.classList.remove('visible');
+            setTimeout(() => {
+                factElement.textContent = facts[randomIndex].text;
+                factElement.classList.add('visible');
+                factImage.src = facts[randomIndex].image;
+                factImage.style.display = 'block';
+            }, 500);
         }
     </script>
 </body>
